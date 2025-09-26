@@ -1,5 +1,4 @@
 "use client";
-"eslint-disable"
 import DashboardLayout from "@/Components/DashboardLayout";
 import axios from "axios";
 import dynamic from "next/dynamic";
@@ -32,12 +31,12 @@ export default function Home() {
           <FilterCard
             label="Select Operator"
             type="select"
-            options={["All", "Jazz", "Ufone", "Telenor", "Zong", "Warid"]}
+            options={["All", "Ufone", "Telenor", "Zong"]}
           />
           <FilterCard
             label="User Type"
             type="select"
-            options={["All", "Guest", "Paid"]}
+            options={["All", "Subscriber", "Paid"]}
           />
         </div>
 

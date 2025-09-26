@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { HiMusicNote, HiPlay, HiSpeakerphone } from "react-icons/hi";
+import { combinedStore } from "../../store";
 
 export default function LoginPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { firstName, lastName, updateFirstName, updateLastName, ...rest } =
+    combinedStore((state) => state);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -47,31 +50,34 @@ export default function LoginPage() {
 
       <div className="relative w-[92%] max-w-md panel p-6 overflow-hidden backdrop-blur shadow-[0_10px_40px_rgba(236,41,123,0.15)]">
         <div className="text-left">
-          <div className="h-10 w-10 rounded-full accent-bg ring-2 ring-white/10" />
-          <h1 className="mt-4 text-2xl font-semibold heading">Welcome back</h1>
-          <p className="mt-1 text-sm subtle">Sign in to your Koyal account</p>
+          <h1 className="mt-4 text-3xl font-semibold heading ">Login</h1>
+          <p className="mt-2 text-sm subtle">Sign in to your account</p>
         </div>
 
         <form className="mt-6 space-y-4" onSubmit={(e) => e.preventDefault()}>
           <div>
-            <label className="block text-xs subtle mb-1">Email</label>
+            <label className="block text-sm subtle mb-2">Email</label>
             <input
               type="email"
               placeholder="you@koyal.app"
               className="w-full input px-3 py-2 placeholder-pink-300/40 focus:outline-none focus:ring-2"
               required
+              value={firstName}
+              onChange={(e) => updateFirstName(e?.target?.value)}
             />
             <p className="mt-1 text-[11px] text-pink-300">
               Use the email you registered with.
             </p>
           </div>
           <div>
-            <label className="block text-xs subtle mb-1">Password</label>
+            <label className="block text-sm subtle mb-2">Password</label>
             <input
               type="password"
               placeholder="••••••••"
               className="w-full input px-3 py-2 placeholder-pink-300/40 focus:outline-none focus:ring-2"
               required
+              value={lastName}
+              onChange={(e) => updateLastName(e?.target?.value)}
             />
             <div className="mt-1 text-[11px] text-pink-300">
               Minimum 8 characters.
@@ -94,7 +100,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-4 text-center text-xs text-pink-300">
+        <p className="mt-4 text-center text-sm text-pink-300">
           Don&apos;t have an account?{" "}
           <Link href="#" className="underline">
             Create one
